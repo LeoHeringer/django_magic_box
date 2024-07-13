@@ -1,16 +1,16 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes, renderer_classes, parser_classes
+from rest_framework_xml.parsers import XMLParser
+from rest_framework_xml.renderers import XMLRenderer
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Product, Box, Subscription, Shipment, Review, Promotion
 from .serializers import ProductSerializer, BoxSerializer, SubscriptionSerializer, ShipmentSerializer, ReviewSerializer, PromotionSerializer
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.decorators import api_view, permission_classes
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@renderer_classes([XMLRenderer, JSONRenderer])
+@parser_classes([XMLParser, JSONParser])
 def create_product(request):
     serializer = ProductSerializer(data=request.data)
     if serializer.is_valid():
@@ -20,6 +20,8 @@ def create_product(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@renderer_classes([XMLRenderer, JSONRenderer])
+@parser_classes([XMLParser, JSONParser])
 def create_box(request):
     serializer = BoxSerializer(data=request.data)
     if serializer.is_valid():
@@ -29,6 +31,8 @@ def create_box(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@renderer_classes([XMLRenderer, JSONRenderer])
+@parser_classes([XMLParser, JSONParser])
 def create_subscription(request):
     serializer = SubscriptionSerializer(data=request.data)
     if serializer.is_valid():
@@ -38,6 +42,8 @@ def create_subscription(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@renderer_classes([XMLRenderer, JSONRenderer])
+@parser_classes([XMLParser, JSONParser])
 def create_shipment(request):
     serializer = ShipmentSerializer(data=request.data)
     if serializer.is_valid():
@@ -47,6 +53,8 @@ def create_shipment(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@renderer_classes([XMLRenderer, JSONRenderer])
+@parser_classes([XMLParser, JSONParser])
 def create_review(request):
     serializer = ReviewSerializer(data=request.data)
     if serializer.is_valid():
@@ -56,6 +64,8 @@ def create_review(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@renderer_classes([XMLRenderer, JSONRenderer])
+@parser_classes([XMLParser, JSONParser])
 def create_promotion(request):
     serializer = PromotionSerializer(data=request.data)
     if serializer.is_valid():
